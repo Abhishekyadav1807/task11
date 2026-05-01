@@ -1,0 +1,108 @@
+:root {
+  --bg: #f4f1ea;
+  --card: #fffdf8;
+  --text: #2a261f;
+  --accent: #b75d2f;
+  --accent-dark: #9f4f27;
+  --border: #e8dece;
+  --success-bg: #e9f8ee;
+  --success-text: #195c31;
+  --error-bg: #fdeeee;
+  --error-text: #8f1d1d;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at 20% 0%, #f9efe3 0%, var(--bg) 45%, #efe6d8 100%);
+  color: var(--text);
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 760px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 12px 34px rgba(71, 50, 24, 0.12);
+}
+
+h1 { margin: 0; }
+.subtitle { margin-top: 6px; color: #685d4b; }
+h2 { margin: 0 0 10px; font-size: 18px; }
+
+.section {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d8ccb8;
+  border-radius: 8px;
+  background: #fff;
+}
+
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+button:hover { background: var(--accent-dark); }
+button.secondary { background: #746a5a; }
+button.small { padding: 8px 10px; font-size: 12px; }
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.alert {
+  padding: 10px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+.alert.success { background: var(--success-bg); color: var(--success-text); }
+.alert.error { background: var(--error-bg); color: var(--error-text); }
+
+.taskList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.taskList li {
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.taskList p { margin: 6px 0; }
+
+@media (max-width: 700px) {
+  .card { padding: 16px; }
+  .taskList li { flex-direction: column; }
+}
