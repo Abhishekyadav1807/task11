@@ -58,6 +58,11 @@ Backend runs on `http://localhost:5000`
 
 Frontend runs on default Vite URL (`http://localhost:5173`).
 
+Frontend env:
+```bash
+cp .env.example .env
+```
+
 ## API Documentation
 - Swagger UI: `http://localhost:5000/api-docs`
 
@@ -87,3 +92,31 @@ Frontend runs on default Vite URL (`http://localhost:5173`).
 
 ## Short Scalability Note
 This architecture is modular and can scale by splitting services (`auth`, `tasks`) into microservices, adding Redis for caching frequent reads, introducing a message queue for async jobs, and placing instances behind a load balancer with stateless JWT-based auth.
+
+## Hosting (Fastest)
+### 1) MongoDB Atlas
+- Create free cluster
+- Create DB user + IP access (`0.0.0.0/0` for quick setup)
+- Copy connection string and use it as `MONGO_URI` in backend hosting env
+
+### 2) Backend on Render
+- New `Web Service` from this GitHub repo
+- Root Directory: `backend`
+- Build Command: `npm install`
+- Start Command: `npm start`
+- Add env vars:
+  - `PORT=5000`
+  - `MONGO_URI=<atlas-uri>`
+  - `JWT_SECRET=<strong-secret>`
+  - `JWT_EXPIRES_IN=1d`
+  - `ADMIN_CREATION_SECRET=<your-secret>`
+  - `CORS_ORIGIN=<your-vercel-frontend-url>`
+
+### 3) Frontend on Vercel
+- New Project from same GitHub repo
+- Root Directory: `frontend`
+- Framework preset: `Vite`
+- Env var:
+  - `VITE_API_BASE_URL=<your-render-backend-url>/api/v1`
+
+After deploy, open frontend URL and test register/login/task CRUD.

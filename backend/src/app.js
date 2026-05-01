@@ -13,7 +13,8 @@ const swaggerSpec = require('./config/swagger');
 const app = express();
 
 app.use(helmet());
-app.use(cors());
+const corsOrigin = process.env.CORS_ORIGIN || '*';
+app.use(cors({ origin: corsOrigin === '*' ? true : corsOrigin.split(',') }));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(mongoSanitize());
